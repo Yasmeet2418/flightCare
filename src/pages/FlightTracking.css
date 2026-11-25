@@ -1,0 +1,747 @@
+.flight-tracking {
+  gap: 16px;
+}
+
+.flight-source-banner,
+.flight-provider-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  color: #536780;
+  border: 1px solid #d7e9d8;
+  border-radius: 10px;
+  background: #f2f8f1;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.flight-source-banner svg,
+.flight-provider-notice svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--blue);
+}
+
+.flight-source-banner strong {
+  color: #263229;
+}
+
+.flight-live-layout {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, .75fr);
+  gap: 15px;
+}
+
+.flight-map-panel,
+.flight-info-panel,
+.flight-schedule-panel {
+  min-width: 0;
+}
+
+.flight-map-panel {
+  padding: 17px;
+}
+
+.flight-map-canvas {
+  z-index: 0;
+  width: 100%;
+  height: clamp(340px, 48vh, 570px);
+  overflow: hidden;
+  border: 1px solid #e4ebf3;
+  border-radius: 11px;
+  background: #edf1ec;
+}
+
+.flight-map-canvas .leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.flight-marker-icon {
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 2px 9px #1d2c2048;
+}
+
+.flight-marker-icon svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: #fff;
+  transform-origin: center;
+}
+
+.flight-map-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 2px 0;
+  color: #8796aa;
+  font-size: 11px;
+}
+
+.flight-map-footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flight-info-panel {
+  align-self: start;
+  min-height: 290px;
+  padding: 18px;
+}
+
+.flight-search-form {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 15px;
+}
+
+.flight-search-form .search-field {
+  min-width: 0;
+  flex: 1;
+  min-height: 44px;
+  border-radius: 9px;
+}
+
+.flight-search-form .search-field input {
+  min-width: 0;
+}
+
+.flight-search-form .button {
+  min-height: 46px;
+}
+
+.flight-inline-error {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  color: #9c4953;
+  border: 1px solid #f0dade;
+  border-radius: 8px;
+  background: #fff7f7;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.flight-detail-content {
+  display: grid;
+  gap: 14px;
+}
+
+.flight-detail-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.flight-detail-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  color: var(--blue);
+  border-radius: 10px;
+  background: var(--green-soft);
+}
+
+.flight-detail-title > div:nth-child(2) {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.flight-detail-title strong {
+  overflow: hidden;
+  color: #263b58;
+  font-size: 14px;
+  text-overflow: ellipsis;
+}
+
+.flight-detail-title span:not(.flight-status) {
+  overflow: hidden;
+  color: #8997aa;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 6px 9px;
+  color: #74839a;
+  border: 1px solid #e5ebf3;
+  border-radius: 20px;
+  background: #f7f9fc;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.flight-detail-title .flight-status {
+  margin-left: auto;
+}
+
+.flight-status-active,
+.flight-status-landed {
+  color: #287a46;
+  border-color: #d7eee3;
+  background: #f0faf5;
+}
+
+.flight-status-delayed,
+.flight-status-scheduled {
+  color: #a76c15;
+  border-color: #f2e4ca;
+  background: #fff8ec;
+}
+
+.flight-status-cancelled {
+  color: #be4351;
+  border-color: #f2dce0;
+  background: #fff4f5;
+}
+
+.flight-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid #e5ebe3;
+  border-radius: 10px;
+  background: #f8faf7;
+}
+
+.flight-route > div {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.flight-route > div:nth-child(2) {
+  text-align: right;
+}
+
+.flight-route > svg {
+  flex: 0 0 auto;
+  color: #8ea1bc;
+}
+
+.flight-route span {
+  color: #95a2b3;
+  font-size: 10px;
+  letter-spacing: .6px;
+}
+
+.flight-route strong {
+  color: #2b4363;
+  font-size: 17px;
+}
+
+.flight-route small {
+  overflow: hidden;
+  color: #7f8ea3;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 9px;
+}
+
+.flight-detail-item {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.flight-detail-item > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8998ac;
+  font-size: 10px;
+}
+
+.flight-detail-item > span svg {
+  flex: 0 0 auto;
+  color: #768579;
+}
+
+.flight-detail-item > strong {
+  overflow-wrap: anywhere;
+  color: #3a4e6a;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.flight-source-note,
+.flight-track-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: #8a9ab0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.flight-source-note svg,
+.flight-track-note svg {
+  flex: 0 0 auto;
+  color: var(--blue);
+}
+
+.flight-track-note {
+  margin-top: 12px;
+  color: #386547;
+}
+
+.flight-empty-state {
+  display: grid;
+  min-height: 135px;
+  place-content: center;
+  gap: 8px;
+  color: #8897ab;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.flight-schedule-panel {
+  padding: 19px;
+}
+
+.flight-schedule-heading {
+  align-items: center;
+}
+
+.flight-date-field {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  color: #7185a1;
+  border: 1px solid #e3ebf5;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.flight-date-field input {
+  width: 130px;
+  min-width: 0;
+  color: #4a5d77;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+}
+
+.flight-provider-notice {
+  margin-bottom: 13px;
+  color: #665735;
+  border-color: #eee5ce;
+  background: #fffcf4;
+}
+
+.flight-provider-notice svg {
+  color: #ad842b;
+}
+
+.flight-schedule-filters {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) minmax(130px, .75fr);
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.flight-filter {
+  display: grid;
+  gap: 5px;
+  color: #8290a4;
+  font-size: 11px;
+}
+
+.flight-filter input,
+.flight-filter select {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 11px;
+  color: #52647e;
+  border: 1px solid #e5ebf2;
+  border-radius: 8px;
+  outline: 0;
+  background: white;
+  font: inherit;
+  font-size: 11px;
+}
+
+.flight-filter input:focus,
+.flight-filter select:focus,
+.flight-date-field:focus-within {
+  border-color: #a6c8a9;
+  box-shadow: 0 0 0 3px rgb(39 107 59 / 9%);
+}
+
+.flight-schedule-list {
+  overflow: auto;
+  border: 1px solid #e9eef5;
+  border-radius: 10px;
+}
+
+.flight-schedule-row {
+  display: grid;
+  min-width: 590px;
+  grid-template-columns: 1.1fr 1fr 1fr .65fr;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-top: 1px solid #edf1f6;
+}
+
+.flight-schedule-row:first-child {
+  border-top: 0;
+}
+
+.flight-schedule-header {
+  color: #8090a6;
+  background: #f8fafd;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .5px;
+}
+
+.flight-schedule-row:not(.flight-schedule-header) > div {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.flight-schedule-row:not(.flight-schedule-header) > div > strong {
+  overflow: hidden;
+  color: #344a67;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-schedule-row small {
+  overflow: hidden;
+  color: #8b99ac;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-table-message {
+  display: flex;
+  min-height: 95px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #8998aa;
+  font-size: 11px;
+  text-align: center;
+}
+
+.flight-data-disclaimer {
+  color: #96a2b2;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.flight-spinning {
+  animation: flight-spin 1s linear infinite;
+}
+
+@keyframes flight-spin {
+  to { transform: rotate(360deg); }
+}
+
+.flight-tracking {
+  color: #d7e2ea;
+}
+
+.flight-tracking > .page-heading h1 {
+  color: #eef5f8;
+}
+
+.flight-tracking > .page-heading p,
+.flight-tracking .panel-heading p {
+  color: #8fa3b1;
+}
+
+.flight-tracking .panel {
+  color: #d7e2ea;
+  border-color: #293a46;
+  background: #101b24;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 16%);
+}
+
+.flight-tracking .panel-heading h2 {
+  color: #e6f0f4;
+}
+
+.flight-tracking .flight-source-banner {
+  color: #afc0ca;
+  border-color: #2b3c48;
+  background: #14232d;
+}
+
+.flight-tracking .flight-source-banner strong {
+  color: #e1edf2;
+}
+
+.flight-tracking .flight-source-banner svg,
+.flight-tracking .flight-source-note svg,
+.flight-tracking .flight-detail-item > span svg {
+  color: #53d2c2;
+}
+
+.flight-tracking .flight-map-footer,
+.flight-tracking .flight-data-disclaimer,
+.flight-tracking .flight-empty-state,
+.flight-tracking .flight-detail-title span:not(.flight-status),
+.flight-tracking .flight-source-note,
+.flight-tracking .flight-search-help {
+  color: #8fa4b1;
+}
+
+.flight-tracking .flight-search-help {
+  margin: -5px 0 12px;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.flight-tracking .live-tag {
+  color: #7ddbb1;
+  border-color: #285643;
+  background: #142c26;
+}
+
+.flight-tracking .flight-detail-title {
+  border-color: #293a46;
+}
+
+.flight-tracking .flight-detail-icon {
+  color: #65decf;
+  background: #19333a;
+}
+
+.flight-tracking .flight-detail-title strong,
+.flight-tracking .flight-route strong,
+.flight-tracking .flight-detail-item > strong {
+  color: #d9e7ed;
+}
+
+.flight-tracking .flight-route {
+  border-color: #2b3d49;
+  background: #14232d;
+}
+
+.flight-tracking .flight-route span,
+.flight-tracking .flight-route small,
+.flight-tracking .flight-detail-item > span {
+  color: #91a5b1;
+}
+
+.flight-tracking .flight-route > svg {
+  color: #57d2c3;
+}
+
+.flight-tracking .flight-status {
+  color: #b6c4cc;
+  border-color: #344752;
+  background: #172630;
+}
+
+.flight-tracking .flight-status-active,
+.flight-tracking .flight-status-landed {
+  color: #7ddbb1;
+  border-color: #285643;
+  background: #142c26;
+}
+
+.flight-tracking .flight-status-delayed,
+.flight-tracking .flight-status-scheduled {
+  color: #e9c779;
+  border-color: #5a4b2d;
+  background: #30291c;
+}
+
+.flight-tracking .flight-status-cancelled {
+  color: #f09b9d;
+  border-color: #60383d;
+  background: #321f23;
+}
+
+.flight-tracking .flight-search-form .search-field,
+.flight-tracking .flight-date-field,
+.flight-tracking .flight-filter input,
+.flight-tracking .flight-filter select {
+  color: #c5d3da;
+  border-color: #344752;
+  background: #14232d;
+}
+
+.flight-tracking .flight-search-form .search-field input,
+.flight-tracking .flight-filter input,
+.flight-tracking .flight-filter select,
+.flight-tracking .flight-date-field input {
+  color: #e1edf2;
+}
+
+.flight-tracking .flight-search-form .search-field input::placeholder,
+.flight-tracking .flight-filter input::placeholder {
+  color: #718692;
+}
+
+.flight-tracking .flight-filter,
+.flight-tracking .flight-date-field,
+.flight-tracking .flight-schedule-header,
+.flight-tracking .flight-schedule-row small {
+  color: #91a5b1;
+}
+
+.flight-tracking .flight-filter input:focus,
+.flight-tracking .flight-filter select:focus,
+.flight-tracking .flight-date-field:focus-within {
+  border-color: #53cdbd;
+  box-shadow: 0 0 0 3px rgb(83 205 189 / 12%);
+}
+
+.flight-tracking .flight-schedule-list {
+  border-color: #293a46;
+}
+
+.flight-tracking .flight-schedule-row {
+  border-color: #293a46;
+}
+
+.flight-tracking .flight-schedule-header {
+  background: #172630;
+}
+
+.flight-tracking .flight-schedule-row:not(.flight-schedule-header) > div > strong {
+  color: #d8e6ec;
+}
+
+.flight-tracking .flight-provider-notice {
+  color: #dbc891;
+  border-color: #51462e;
+  background: #29251c;
+}
+
+.flight-tracking .flight-provider-notice svg {
+  color: #e6bf60;
+}
+
+.flight-tracking .flight-inline-error {
+  color: #f0a3a5;
+  border-color: #60383d;
+  background: #321f23;
+}
+
+.flight-tracking .flight-table-message,
+.flight-tracking .flight-track-note {
+  color: #8fa4b1;
+}
+
+.flight-map-canvas .flight-aircraft-cluster {
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(17 43 58 / 92%);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 45%);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.flight-map-canvas .flight-aircraft-cluster::before {
+  position: absolute;
+  top: 3px;
+  color: #65decf;
+  content: "✈";
+  font-size: 12px;
+}
+
+.flight-map-canvas .flight-aircraft-cluster span {
+  padding-top: 11px;
+}
+
+@media (max-width: 1100px) {
+  .flight-live-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(270px, .8fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .flight-live-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .flight-info-panel {
+    min-height: 0;
+  }
+
+  .flight-map-canvas {
+    height: 410px;
+  }
+}
+
+@media (max-width: 600px) {
+  .flight-tracking > .page-heading .heading-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flight-tracking > .page-heading .heading-actions .button {
+    width: 100%;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+
+  .flight-map-panel,
+  .flight-info-panel,
+  .flight-schedule-panel {
+    padding: 14px;
+  }
+
+  .flight-map-canvas {
+    height: 330px;
+  }
+
+  .flight-schedule-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .flight-schedule-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flight-filter:last-child {
+    grid-column: 1 / -1;
+  }
+}

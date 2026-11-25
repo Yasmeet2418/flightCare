@@ -1,5 +1,5 @@
 
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { useAuth } from './context/useAuth'
@@ -12,6 +12,7 @@ import { entityConfigs } from './pages/entityConfig'
 
 const Dashboard = lazy(() => import('./pages/dashboard'))
 const Flights = lazy(() => import('./pages/flights'))
+const FlightTracking = lazy(() => import('./pages/FlightTracking'))
 const Disruptions = lazy(() => import('./pages/Disruptions'))
 const Passengers = lazy(() => import('./pages/Passengers'))
 const Assistance = lazy(() => import('./pages/Assistance'))
@@ -32,11 +33,9 @@ function HomeRedirect() {
 }
 
 function AppShell() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation()
   return <div className="app-shell">
-    <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-    <div className="app-main"><Navbar onMenuClick={() => setSidebarOpen(true)} /><main className="main-content" key={location.pathname}><Outlet /></main></div>
+    <div className="app-main"><Navbar><Sidebar /></Navbar><main className="main-content" key={location.pathname}><Outlet /></main></div>
   </div>
 }
 
@@ -49,6 +48,7 @@ function ApplicationRoutes() {
         <Route index element={<HomeRedirect />} />
         <Route path="profile" element={<Profile />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="tracking" element={<FlightTracking />} />
         <Route element={<ProtectedRoute allowedRoles={['staff']} />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="disruptions" element={<Disruptions />} />

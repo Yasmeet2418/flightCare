@@ -1,7 +1,8 @@
+import { useEffect, useRef, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
-  Activity, Bell, BriefcaseBusiness, ChartNoAxesCombined, CircleHelp, FileClock,
-  LayoutDashboard, LogOut, Plane, PlaneTakeoff, Settings, Shield, UserRound, Users, X,
+  Activity, Bell, BriefcaseBusiness, ChartNoAxesCombined, ChevronDown, CircleHelp, FileClock,
+  LayoutDashboard, LogOut, Menu, Plane, PlaneTakeoff, Radio, Settings, Shield, UserRound, Users,
 } from 'lucide-react'
 import { getSupabaseError } from '../lib/supabase'
 import { useAuth } from '../context/useAuth'
@@ -10,6 +11,7 @@ import { useToast } from '../context/useToast'
 const staff = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ['staff'] },
   { to: '/flights', label: 'Flight management', icon: PlaneTakeoff, roles: ['admin', 'operations_manager'] },
+  { to: '/tracking', label: 'Flight tracking', icon: Radio, roles: ['staff'] },
   { to: '/disruptions', label: 'Disruptions', icon: Activity, roles: ['staff'] },
   { to: '/passengers', label: 'Passengers', icon: Users, roles: ['staff'] },
   { to: '/alternatives', label: 'Alternative flights', icon: Plane, roles: ['admin', 'operations_manager'] },
@@ -20,6 +22,7 @@ const staff = [
 ]
 const passenger = [
   { to: '/portal', label: 'My dashboard', icon: LayoutDashboard },
+  { to: '/tracking', label: 'Flight tracking', icon: Plane },
   { to: '/my-bookings', label: 'My bookings', icon: BriefcaseBusiness },
   { to: '/my-disruptions', label: 'Disrupted flights', icon: Activity },
   { to: '/my-alternatives', label: 'Alternative flights', icon: Plane },
@@ -27,12 +30,35 @@ const passenger = [
   { to: '/my-notifications', label: 'Notifications', icon: Bell },
 ]
 
-export default function Sidebar({ open, onClose }) {
+export default function Sidebar() {
   const { role, logout, signingOut } = useAuth()
   const navigate = useNavigate()
   const toast = useToast()
+  const [open, setOpen] = useState(false)
+  const menuRef = useRef(null)
+  const toggleRef = useRef(null)
   const links = role === 'passenger' ? passenger : staff.filter((item) => item.roles.includes(role) || (item.roles.includes('staff') && Boolean(role)))
+  useEffect(() => {
+    if (!open) return undefined
+    const closeOnOutsideClick = (event) => {
+      if (!menuRef.current?.contains(event.target)) setOpen(false)
+    }
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        toggleRef.current?.focus()
+      }
+    }
+    document.addEventListener('pointerdown', closeOnOutsideClick)
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideClick)
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [open])
+  const closeMenu = () => setOpen(false)
   const handleLogout = async () => {
+    closeMenu()
     const { error, signedOut } = await logout()
     if (error) {
       toast(
@@ -45,23 +71,24 @@ export default function Sidebar({ open, onClose }) {
     if (signedOut) navigate('/login', { replace: true })
   }
   return (
-    <>
-      {open && <button className="sidebar-backdrop" aria-label="Close navigation" onClick={onClose} />}
-      <aside className={`sidebar ${open ? 'sidebar-open' : ''}`}>
-        <div className="brand"><div className="brand-icon"><Plane size={20} fill="currentColor" /></div><div><strong>FlightCare</strong><span>DISRUPTION CONTROL</span></div><button className="icon-button sidebar-close" aria-label="Close navigation" onClick={onClose}><X size={19} /></button></div>
+    <div className="navigation-dropdown" ref={menuRef}>
+      <button ref={toggleRef} className={`nav-dropdown-toggle ${open ? 'nav-dropdown-open' : ''}`} type="button" aria-expanded={open} aria-controls="workspace-navigation" onClick={() => setOpen((isOpen) => !isOpen)}>
+        <Menu size={19} /><span>Menu</span><ChevronDown size={16} />
+      </button>
+      {open && <aside className="sidebar" id="workspace-navigation">
         <div className="workspace-label">WORKSPACE</div>
-        <nav className="side-nav">
-          {links.map(({ to, label, icon: Icon }) => <NavLink key={to} to={to} onClick={onClose} className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}><Icon size={18} /><span>{label}</span>{label === 'Assistance requests' && <span className="nav-indicator" />}</NavLink>)}
+        <nav className="side-nav" aria-label="Workspace navigation">
+          {links.map(({ to, label, icon: Icon }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}><Icon size={20} /><span>{label}</span>{label === 'Assistance requests' && <span className="nav-indicator" />}</NavLink>)}
         </nav>
         <div className="side-bottom">
           <div className="workspace-label">PREFERENCES</div>
-          <NavLink to="/profile" onClick={onClose} className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}><UserRound size={18} /><span>Profile</span></NavLink>
-          <NavLink to="/settings" onClick={onClose} className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}><Settings size={18} /><span>Settings</span></NavLink>
+          <NavLink to="/profile" onClick={closeMenu} className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}><UserRound size={20} /><span>Profile</span></NavLink>
+          <NavLink to="/settings" onClick={closeMenu} className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}><Settings size={20} /><span>Settings</span></NavLink>
           {role !== 'passenger' && <div className="sidebar-status"><span className="live-dot" /><div><strong>Operations online</strong><small>Supabase connected session</small></div></div>}
-          <button type="button" className="logout-link" onClick={handleLogout} disabled={signingOut}><LogOut size={18} /><span>{signingOut ? 'Signing out…' : 'Sign out'}</span></button>
-          <div className="sidebar-footer"><FileClock size={15} /> FlightCare workspace · 2026</div>
+          <button type="button" className="logout-link" onClick={handleLogout} disabled={signingOut}><LogOut size={20} /><span>{signingOut ? 'Signing out…' : 'Sign out'}</span></button>
+          <div className="sidebar-footer"><FileClock size={16} /> FlightCare workspace · 2026</div>
         </div>
-      </aside>
-    </>
+      </aside>}
+    </div>
   )
 }

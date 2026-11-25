@@ -7,11 +7,11 @@ import Loading from '../components/Loading'
 import { getSupabaseError, settleSupabaseQuery, supabase } from '../lib/supabase'
 
 const statusColors = {
-  on_time: '#22A06B',
-  scheduled: '#1677FF',
-  delayed: '#F2A344',
-  cancelled: '#E04F5F',
-  diverted: '#36C5E8',
+  on_time: '#287A46',
+  scheduled: '#D3AA46',
+  delayed: '#A97619',
+  cancelled: '#C43B43',
+  diverted: '#A97619',
 }
 
 function formatTime(value) {
